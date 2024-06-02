@@ -6,7 +6,7 @@
 
 [Docsify](https://docsify.js.org/#/) can generate article, portfolio and documentation websites on the fly. Unlike Docusaurus, Hugo and many other Static Site Generators (SSG), it does not generate static html files. Instead, it smartly loads and parses your Markdown content files and displays them as a website.
 
-## Introduction
+# Introduction
 
 **Markdown** is a system-independent markup language that is easier to learn and use than **HTML**.
 
@@ -30,18 +30,9 @@ John Gruber, the author of Markdown, puts it like this:
 
 Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like:
 
-### Headings
+# Reconnaissance
 
 Headings from `h1` through `h6` are constructed with a `#` for each level:
-
-```markdown
-# h1 Heading
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
-```
 
 Renders to:
 
@@ -63,7 +54,7 @@ HTML:
 <h6>h6 Heading</h6>
 ```
 
-### Comments
+# Initial Access
 
 Comments should be HTML compatible
 
@@ -78,7 +69,7 @@ Comment below should **NOT** be seen:
 This is a comment
 -->
 
-### Horizontal Rules
+# Privilege Escalation
 
 The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can create a `<hr>` with any of the following:
 
@@ -95,7 +86,7 @@ ___
 ***
 
 
-### Body Copy
+# Exfiltration
 
 Body copy written as normal, plain text will be wrapped with `<p></p>` tags in the rendered HTML.
 
@@ -110,9 +101,9 @@ renders to this HTML:
 <p>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.</p>
 ```
 
-### Emphasis
+# Impact
 
-#### Bold
+# Collection
 For emphasizing a snippet of text with a heavier font-weight.
 
 The following snippet of text is **rendered as bold text**.
@@ -130,7 +121,7 @@ and this HTML
 <strong>rendered as bold text</strong>
 ```
 
-#### Italics
+# Persistance
 For emphasizing a snippet of text with italics.
 
 The following snippet of text is _rendered as italicized text_.
@@ -150,7 +141,7 @@ and this HTML:
 ```
 
 
-#### strikethrough
+# Command&Control
 In GFM (GitHub flavored Markdown) you can do strikethroughs.
 
 ```markdown
@@ -166,7 +157,7 @@ HTML:
 <del>Strike through this text.</del>
 ```
 
-### Blockquotes
+# Conclusion
 For quoting blocks of content from another source within your document.
 
 Add `>` before any text you want to quote.
