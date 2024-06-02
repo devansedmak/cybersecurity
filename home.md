@@ -4,7 +4,7 @@
 
 ![Photo of Mountain](images/mountain.jpg)
 
-[Docsify](https://docsify.js.org/#/) can generate article, portfolio and documentation websites on the fly. Unlike Docusaurus, Hugo and many other Static Site Generators (SSG), it does not generate static html files. Instead, it smartly loads and parses your Markdown content files and displays them as a website.
+[Docsify](https://docsify.js.org/#/)
 
 # Introduction
 
@@ -13,28 +13,10 @@
 ![The Markdown Mark](images/markdown-red.png)  
 _Figure 1: The Markdown Mark_
 
-Some of the key benefits are:
-
-1. Markdown is simple to learn, with minimal extra characters, so it's also quicker to write content.
-2. Less chance of errors when writing in markdown.
-3. Produces valid XHTML output.
-4. Keeps the content and the visual display separate, so you cannot mess up the look of your site.
-5. Write in any text editor or Markdown application you like.
-6. Markdown is a joy to use!
-
-John Gruber, the author of Markdown, puts it like this:
-
 > The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
 > -- <cite>John Gruber</cite>
 
-
-Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like:
-
 # Reconnaissance
-
-Headings from `h1` through `h6` are constructed with a `#` for each level:
-
-Renders to:
 
 <h1> h1 Heading </h1>
 <h2>  h2 Heading </h2>
@@ -43,31 +25,10 @@ Renders to:
 <h5>  h5 Heading </h5>
 <h6>  h6 Heading </h6>
 
-HTML:
-
-```html
-<h1>h1 Heading</h1>
-<h2>h2 Heading</h2>
-<h3>h3 Heading</h3>
-<h4>h4 Heading</h4>
-<h5>h5 Heading</h5>
-<h6>h6 Heading</h6>
-```
 
 # Initial Access
 
-Comments should be HTML compatible
-
-```html
-<!--
-This is a comment
--->
-```
 Comment below should **NOT** be seen:
-
-<!--
-This is a comment
--->
 
 # Privilege Escalation
 
@@ -88,74 +49,15 @@ ___
 
 # Exfiltration
 
-Body copy written as normal, plain text will be wrapped with `<p></p>` tags in the rendered HTML.
-
-So this body copy:
-
-```markdown
-Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
-```
-renders to this HTML:
-
-```html
-<p>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.</p>
-```
-
 # Impact
 
 # Collection
-For emphasizing a snippet of text with a heavier font-weight.
-
-The following snippet of text is **rendered as bold text**.
-
-```markdown
-**rendered as bold text**
-```
-renders to:
-
-**rendered as bold text**
-
-and this HTML
-
-```html
-<strong>rendered as bold text</strong>
-```
 
 # Persistance
-For emphasizing a snippet of text with italics.
 
 The following snippet of text is _rendered as italicized text_.
 
-```markdown
-_rendered as italicized text_
-```
-
-renders to:
-
-_rendered as italicized text_
-
-and this HTML:
-
-```html
-<em>rendered as italicized text</em>
-```
-
-
 # Command&Control
-In GFM (GitHub flavored Markdown) you can do strikethroughs.
-
-```markdown
-~~Strike through this text.~~
-```
-Which renders to:
-
-~~Strike through this text.~~
-
-HTML:
-
-```html
-<del>Strike through this text.</del>
-```
 
 # Conclusion
 For quoting blocks of content from another source within your document.
@@ -169,14 +71,6 @@ Add `>` before any text you want to quote.
 Renders to:
 
 > **Fusion Drive** combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
-
-and this HTML:
-
-```html
-<blockquote>
-  <p><strong>Fusion Drive</strong> combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.</p>
-</blockquote>
-```
 
 Blockquotes can also be nested:
 
@@ -197,9 +91,6 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 ### Lists
 
 #### Unordered
-A list of items in which the order of the items does not explicitly matter.
-
-You may use any of the following symbols to denote bullets for each list item:
 
 ```markdown
 * valid bullet
@@ -238,28 +129,6 @@ Renders to:
 + Aenean sit amet erat nunc
 + Eget porttitor lorem
 
-And this HTML
-
-```html
-<ul>
-  <li>Lorem ipsum dolor sit amet</li>
-  <li>Consectetur adipiscing elit</li>
-  <li>Integer molestie lorem at massa</li>
-  <li>Facilisis in pretium nisl aliquet</li>
-  <li>Nulla volutpat aliquam velit
-    <ul>
-      <li>Phasellus iaculis neque</li>
-      <li>Purus sodales ultricies</li>
-      <li>Vestibulum laoreet porttitor sem</li>
-      <li>Ac tristique libero volutpat at</li>
-    </ul>
-  </li>
-  <li>Faucibus porta lacus fringilla vel</li>
-  <li>Aenean sit amet erat nunc</li>
-  <li>Eget porttitor lorem</li>
-</ul>
-```
-
 #### Ordered
 
 A list of items in which the order of items does explicitly matter.
@@ -285,45 +154,6 @@ Renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-And this HTML:
-
-```html
-<ol>
-  <li>Lorem ipsum dolor sit amet</li>
-  <li>Consectetur adipiscing elit</li>
-  <li>Integer molestie lorem at massa</li>
-  <li>Facilisis in pretium nisl aliquet</li>
-  <li>Nulla volutpat aliquam velit</li>
-  <li>Faucibus porta lacus fringilla vel</li>
-  <li>Aenean sit amet erat nunc</li>
-  <li>Eget porttitor lorem</li>
-</ol>
-```
-
-**TIP**: If you just use `1.` for each number, Markdown will automatically number each item. For example:
-
-```markdown
-1. Lorem ipsum dolor sit amet
-1. Consectetur adipiscing elit
-1. Integer molestie lorem at massa
-1. Facilisis in pretium nisl aliquet
-1. Nulla volutpat aliquam velit
-1. Faucibus porta lacus fringilla vel
-1. Aenean sit amet erat nunc
-1. Eget porttitor lorem
-```
-
-Renders to:
-
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
-4. Facilisis in pretium nisl aliquet
-5. Nulla volutpat aliquam velit
-6. Faucibus porta lacus fringilla vel
-7. Aenean sit amet erat nunc
-8. Eget porttitor lorem
-
 ### Code
 
 #### Inline code
@@ -336,12 +166,6 @@ In this example, `<section></section>` should be wrapped as **code**.
 Renders to:
 
 In this example, `<section></section>` should be wrapped with **code**.
-
-HTML:
-
-```html
-<p>In this example, <code>&lt;section&gt;&lt;/section&gt;</code> should be wrapped with <strong>code</strong>.</p>
-```
 
 #### Indented code
 
@@ -361,19 +185,6 @@ Renders to:
     line 2 of code
     line 3 of code
 
-HTML:
-
-```html
-<pre>
-  <code>
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-  </code>
-</pre>
-```
-
 
 #### Block code "fences"
 
@@ -388,14 +199,6 @@ Sample text here...
 
 ```
 Sample text here...
-```
-
-HTML:
-
-```html
-<pre>
-  <code>Sample text here...</code>
-</pre>
 ```
 
 #### Syntax highlighting
@@ -447,67 +250,6 @@ grunt.initConfig({
   }
 };
 ```
-
-### Tables
-Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.
-
-
-```markdown
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-```
-
-Renders to:
-
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
-And this HTML:
-
-```html
-<table>
-  <tr>
-    <th>Option</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>data</td>
-    <td>path to data files to supply the data that will be passed into templates.</td>
-  </tr>
-  <tr>
-    <td>engine</td>
-    <td>engine to be used for processing templates. Handlebars is the default.</td>
-  </tr>
-  <tr>
-    <td>ext</td>
-    <td>extension to be used for dest files.</td>
-  </tr>
-</table>
-```
-
-### Right aligned text
-
-Adding a colon on the right side of the dashes below any heading will right align text for that column.
-
-```markdown
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-```
-
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
 
 ### Links
 
