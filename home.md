@@ -1,6 +1,6 @@
-# My Open Publishing Space
+# Cybersecurity - Report
 
-## Create, Share and Collaborate
+## Devan Sedmak
 
 ![Photo of Mountain](images/mountain.jpg)
 
