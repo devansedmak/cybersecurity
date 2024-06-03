@@ -98,6 +98,12 @@ SSH Login Check Scanner – Metasploit, InfoSec Matter
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login
 InfoSec Matter, MySQL login
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login
+Pwning WordPress Passwords, InfoSec Write-ups
+https://infosecwriteups.com/pwning-wordpress-passwords-2caf12216956
+ChatGPT
+https://chatgpt.com/
+Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube
+https://www.youtube.com/watch?v=XHShse4z6ds
 
 
 For quoting blocks of content from another source within your document.
