@@ -11,7 +11,7 @@ My project consists in the execution of some attack steps on a vulnerable machin
 Firstly, we need to find the IP address and network number of our Kali machine. To do so we open a terminal in Kali Linux and we use the `ifconfig` command. We obtain two network interfaces (_Fig. 1_). Let’s focus on the first one. Then we need to determine which other hosts are connected to this network. We can use `nmap` (_Fig. 1_) with the network number of the interface that we obtained before. We obtain 3 IP addresses (_Fig. 1_): the first one is the default gateway, because we notice that only the TCP port is open and the third one is our Kali machine (same IP address as in `ifconfig`). So, the second one is the target (IP 10.0.2.4).
 
 ![Fig.1](images/fig1.png) 
-_Fig. 1_
+#### Fig. 1
 
 ## Initial Access
 
