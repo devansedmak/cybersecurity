@@ -1,5 +1,3 @@
-<div style="text-align: justify">
-  
 # Cybersecurity - Report
 
 ### Devan Sedmak
@@ -103,5 +101,3 @@ https://chatgpt.com/
 
 Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube
 https://www.youtube.com/watch?v=XHShse4z6ds
-
- </div>
