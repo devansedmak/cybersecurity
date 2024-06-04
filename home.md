@@ -10,7 +10,7 @@
 
 My project consists in the execution of some attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the "Hacking Lab" section of the course website. I set up two virtual machines, connected to the same network. The first one is a Kali Linux and it will execute the attack steps. The second one is Metasploitable3 Windows Server 2008, that will be our target. We log on the Metasploitable3 machine with the user account “vagrant” (password: vagrant), as a normal user would, and we start WampServer. We remain logged on until the end of the simulation.
 
-![fig. 1](images/fig. 1.png)  
+![fig. 1](images/fig1.png)  
 _Figure 1: The Markdown Mark_
 
 > The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
