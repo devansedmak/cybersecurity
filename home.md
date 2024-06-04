@@ -77,9 +77,9 @@ Understanding the attacker's perspective through these simulations helps us to u
 # Bibliography
 
 Bartoli Alberto – Cybersecurity Course, Hacking Lab
-[https://bartolialberto.github.io/CybersecurityCourse/Hacking%20Lab/Lab_Hacking_Metasploitable/]
+https://bartolialberto.github.io/CybersecurityCourse/Hacking%20Lab/Lab_Hacking_Metasploitable/
 SSH Username Enumeration - Metasploit, InfoSec Matter
-[https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_enumusers]
+https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_enumusers
 SSH Login Check Scanner – Metasploit, InfoSec Matter
 [https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login]
 InfoSec Matter, MySQL login
@@ -213,12 +213,9 @@ Content for chapter one.
 ### Chapter 3 <a id="chapter-3"></a>
 Content for chapter one.
 ```
-![Image of Minion](https://octodex.github.com/images/minion.png)
 
 and using a local image (which also displays in GitHub):
 Themis susurro tura collo: cunas setius *norat*, Calydon. Hyaenam terret credens
 habenas communia causas vocat fugamque roganti Eleis illa ipsa id est madentis
 loca: Ampyx si quis. Videri grates trifida letum talia pectus sequeretur erat
 ignescere eburno e decolor terga.
-
-> Note: Example page content from [GetGrav.org](https://learn.getgrav.org/17/content/markdown), included to demonstrate the portability of Markdown-based content
