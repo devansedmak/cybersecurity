@@ -90,7 +90,7 @@ https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ss
 SSH Login Check Scanner – Metasploit, InfoSec Matter
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login
 
-InfoSec Matter, MySQL login
+MySQL login, InfoSec Matter
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login
 
 Pwning WordPress Passwords, InfoSec Write-ups
