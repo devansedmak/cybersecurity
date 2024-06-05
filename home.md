@@ -3,9 +3,11 @@
 ### Devan Sedmak
 
 ## Introduction
+
 <p style="text-align: justify;">
 My project involves executing several attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the _Hacking Lab_ section of the course website. I set up two virtual machines, connected to the same network. The first one is a Kali Linux and it will execute the attack steps. The second one is a Metasploitable3 Windows Server 2008, that will be our target. We log on the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_), as a normal user would, and we start WampServer. We remain logged on until the end of the simulation.
-<\p>
+</p>
+  
 ## Reconnaissance
 
 Firstly, we need to find the IP address and network number of our Kali machine. To do so we open a terminal in Kali Linux and we use the `ifconfig` command. We obtain two network interfaces (_Fig. 1_). Let’s focus on the first one. Then we need to determine which other hosts are connected to this network. We can use `nmap` (_Fig. 1_) with the network number of the interface that we obtained before. We obtain three IP addresses (_Fig. 1_). The first one is the default gateway, because only the TCP port is open. The third one matches our Kali machine's IP address (as in `ifconfig`). Therefore, the second one is the target (IP 10.0.2.4).
