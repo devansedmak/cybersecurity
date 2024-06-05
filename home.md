@@ -81,30 +81,23 @@ Understanding the attacker's perspective through these simulations helps us to u
 
 ## Bibliography
 
-Bartoli Alberto – Cybersecurity Course, Hacking Lab
-
+Bartoli Alberto - Cybersecurity Course, Hacking Lab\
 https://bartolialberto.github.io/CybersecurityCourse/Hacking%20Lab/Lab_Hacking_Metasploitable/
 
-SSH Username Enumeration - Metasploit, InfoSec Matter
-
+SSH Username Enumeration - Metasploit, InfoSec Matter\
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_enumusers
 
-SSH Login Check Scanner - Metasploit, InfoSec Matter
-
+SSH Login Check Scanner - Metasploit, InfoSec Matter\
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login
 
-MySQL login, InfoSec Matter
-
+MySQL login, InfoSec Matter\
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login
 
-Pwning WordPress Passwords, InfoSec Write-ups
-
+Pwning WordPress Passwords, InfoSec Write-ups\
 https://infosecwriteups.com/pwning-wordpress-passwords-2caf12216956
 
-ChatGPT
-
+ChatGPT\
 https://chatgpt.com/
 
-Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube
-
+Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube\
 https://www.youtube.com/watch?v=XHShse4z6ds
