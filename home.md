@@ -77,27 +77,34 @@ _Fig. 8_
 
 ## Conclusion
 
-Understanding the attacker's perspective through these simulations helps us to understand what the possible threats are and how to defend against them. Indeed, this project demonstrates why the “boring” defensive strategies such as network monitoring, implementing strong password policies, restricting access to sensitive information and applying multi-factor authentication are so important. Effective implementation of these strategies, following the _Defense in Depth_ principle, would have mitigated most of the cybersecurity threats presented here. SO, it is fundamental to include regular security audits, timely patch management, and deployment of detection sensors in our systems' defensive policies. A proactive and layered approach to cybersecurity is therefore necessary to successfully protect networked systems from evolving cyber threats.
+Understanding the attacker's perspective through these simulations helps us to understand what the possible threats are and how to defend against them. Indeed, this project demonstrates why the “boring” defensive strategies such as network monitoring, implementing strong password policies, restricting access to sensitive information and applying multi-factor authentication are so important. Effective implementation of these strategies, following the _Defense in Depth_ principle, would have mitigated most of the cybersecurity threats presented here. S, it is fundamental to include regular security audits, timely patch management and deployment of detection sensors in our systems' defensive policies. A proactive and layered approach to cybersecurity is therefore necessary to successfully protect networked systems from evolving cyber threats.
 
 ## Bibliography
 
 Bartoli Alberto – Cybersecurity Course, Hacking Lab
+
 https://bartolialberto.github.io/CybersecurityCourse/Hacking%20Lab/Lab_Hacking_Metasploitable/
 
 SSH Username Enumeration - Metasploit, InfoSec Matter
+
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_enumusers
 
-SSH Login Check Scanner – Metasploit, InfoSec Matter
+SSH Login Check Scanner - Metasploit, InfoSec Matter
+
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/ssh/ssh_login
 
 MySQL login, InfoSec Matter
+
 https://www.infosecmatter.com/metasploit-module-library/?mm=auxiliary/scanner/mysql/mysql_login
 
 Pwning WordPress Passwords, InfoSec Write-ups
+
 https://infosecwriteups.com/pwning-wordpress-passwords-2caf12216956
 
 ChatGPT
+
 https://chatgpt.com/
 
 Simple WordPress Web Shell Tutorial (Guided Hacking), YouTube
+
 https://www.youtube.com/watch?v=XHShse4z6ds
