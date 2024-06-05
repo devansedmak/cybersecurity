@@ -4,10 +4,7 @@
 
 ## Introduction
 
-<link rel="stylesheet" type="text/css" href="styles.css">
-<p class="justify-text">
 My project involves executing several attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the _Hacking Lab_ section of the course website. I set up two virtual machines, connected to the same network. The first one is a Kali Linux and it will execute the attack steps. The second one is a Metasploitable3 Windows Server 2008, that will be our target. We log on the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_), as a normal user would, and we start WampServer. We remain logged on until the end of the simulation.
-</p>
   
 ## Reconnaissance
 
