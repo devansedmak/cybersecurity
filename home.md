@@ -71,7 +71,9 @@ _Fig. 4_
 
 <div align="justify">
 
-Now let’s try to obtain the credentials of the users of WordPress, a service running on the target's webserver. Firstly, we perform online guessing on the MySQL service with the same dictionary used before for the SSH service. To do so we use the command `msfconsole -q` and then `use auxiliary/scanner/mysql/mysql_login`. Now let’s use `set RHOSTS 10.0.2.4`, `set pass_file dictionary.txt` and `set user_file dictionary.txt` as before. After running the exploit with `run`, we observe that `root` is a valid username and the password is blank (null). We use the obtained username and password to connect to the MySQL service with the command `mysql --user=root --password= --host=10.0.2.4`. We now need to extract the password hashes of the WordPress users. We use the commands `show databases;` and `use wordpress` to access the WordPress database. We are interested in the table that contains the information of the users. To access it we use the commands `show tables;` and `describe wp_users;` (_Fig. 5_).
+Now let’s try to obtain the credentials of the users of WordPress, a service running on the target's webserver. Firstly, we perform online guessing on the MySQL service with the same dictionary used before for the SSH service. To do so we use the command `msfconsole -q` and then `use auxiliary/scanner/mysql/mysql_login`. Now let’s use `set RHOSTS 10.0.2.4`, `set pass_file dictionary.txt` and `set user_file dictionary.txt` as before. After running the exploit with `run`, we observe that `root` is a valid username and the password is blank (null).
+
+We use the obtained username and password to connect to the MySQL service with the command `mysql --user=root --password= --host=10.0.2.4`. We now need to extract the password hashes of the WordPress users. We use the commands `show databases;` and `use wordpress` to access the WordPress database. We are interested in the table that contains the information of the users. To access it we use the commands `show tables;` and `describe wp_users;` (_Fig. 5_).
 
 ![Fig. 5](images/fig5.png)  
 _Fig. 5_
