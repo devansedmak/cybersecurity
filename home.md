@@ -10,7 +10,7 @@ My project involves executing several attack steps on a vulnerable machine. The 
 
 **Threat model**:
 - the virtual machines are connected to the same network,
-- the victim logs on the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_),
+- the victim logs on to the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_),
 - the victim starts WampServer,
 - the victim remains logged on until the end of the simulation.
 
