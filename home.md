@@ -29,7 +29,7 @@ Now that we have the IP address of the target machine, we could try connecting t
 
 Now we use the scanner `use auxiliary/scanner/ssh/ssh_enumusers`, after launching _metasploit_ with the command `msfconsole -q`. Then we use the command `set RHOSTS 10.0.2.4` to set the target and `set user_file dictionary.txt` to set the dictionary that will be used by the enumeration tool. To run the exploit, use `run`. We will obtain a list of valid usernames on the target that match entries in the constructed dictionary (_Fig. 2_).
 
-Now we select the username _vagrant_ and we try to obtain the corresponding password by an online guessing attack using the exploit `use auxiliary/scanner/ssh/ssh_login`. We need to use the command `set RHOSTS 10.0.2.4` as before, then `set username vagrant` and finally `set pass_file dictionary.txt` (_Fig. 2_). We then run the exploit with `run`.
+Now we select the username _vagrant_ and we try to obtain the corresponding password by an online guessing attack using the exploit `use auxiliary/scanner/ssh/ssh_login`. We need to use the command `set RHOSTS 10.0.2.4` as before, then `set username vagrant` and finally `set pass_file dictionary.txt` (_Fig. 2_). We then execute the exploit with `run`. We will obtain the password of the user _vagrant_ (_Fig. 2_).
 
 Now let's open a connection to the SSH service with the command `ssh vagrant@10.0.2.4`. We insert the obtained password and we now have a SSH session, where we are impersonating the user _vagrant_. By inserting the command `cmd` we get a Command Prompt. Move to the Desktop directory with `cd`.
 
