@@ -6,7 +6,13 @@
 
 <div align="justify">
 
-My project involves executing several attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the _Hacking Lab_ section of the course website. I set up two virtual machines. The first one is a Kali Linux and it will execute the attack steps. The second one is a Metasploitable3 Windows Server 2008, that will be our target. **Threat model**: the virtual machines are connected to the same network. The victim logs on the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_) and starts WampServer. He/she remains logged on until the end of the simulation.
+My project involves executing several attack steps on a vulnerable machine. The steps are small variations of some lab activities proposed in the _Hacking Lab_ section of the course website. I set up two virtual machines. The first one is a Kali Linux and it will execute the attack steps. The second one is a Metasploitable3 Windows Server 2008, that will be our target.
+
+**Threat model**:
+-the virtual machines are connected to the same network,
+-the victim logs on the Metasploitable3 machine with the user account _vagrant_ (password: _vagrant_),
+-the victim starts WampServer,
+-the victim remains logged on until the end of the simulation.
 
 </div>
 
