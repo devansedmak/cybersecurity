@@ -39,7 +39,7 @@ _Fig. 2_
 
 <div align="justify">
 
-Now we can search for some interesting text files in the target’s file system. To do this, we use the command `dir *.txt`. We can see that there is a file called _password.txt_. If we look at the content of this file with the command `type`, we can see the password of the _Administrator_ account (_Fig. 3_). Thus, we got the password of an account with high privileges. We can now perform privilege escalation by using the username _Administrator_ and the obtained password to connect to the SSH service with the command `ssh Administrator@10.0.2.4`.
+Now we can search for some text files in the target’s file system. To do this, we use the command `dir *.txt`. We can see that there is a file called _password.txt_. If we look at the content of this file with the command `type`, we can see the password of the _Administrator_ account (_Fig. 3_). Thus, we got the password of an account with high privileges. We can now perform privilege escalation by using the username _Administrator_ and the obtained password to connect to the SSH service with the command `ssh Administrator@10.0.2.4`.
 
 </div>
 
