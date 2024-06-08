@@ -1,4 +1,4 @@
-# Cybersecurity - Report
+# Cybersecurity Report: Simulated attack on a vulnerable machine
 
 ### Devan Sedmak
 
