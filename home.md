@@ -76,7 +76,7 @@ Now let’s try to obtain the credentials of the users of WordPress, a service r
 ![Fig. 5](images/fig5.png)  
 _Fig. 5_
 
-Now let’s retrieve the usernames and password hashes from this table with the command `select concat_ws(':', user_login, user_pass) from wp_users;`. We copy and paste them in the text file _hashes.txt_ (_Fig. 6_).
+Now let’s retrieve the usernames and password hashes from this table with the command `select concat_ws(':', user_login, user_pass) from wp_users;`. We copy and paste them in the text file _hashes.txt_ (_Fig. 6_).\
 Now we can perform offline guessing on these WordPress password hashes with _John the Ripper_, using the command `john --format=phpass hashes.txt --wordlist=dictionary.txt`. Here _PHPass_ is the format of the hash for WordPress. We use the same password dictionary as before for simplicity, even if we could directly use a hash dictionary, because the passwords are not salted. Using the command `john --show hashes.txt`, we can visualize the obtained cleartext passwords of the corresponding accounts (_Fig. 6_).
 
 </div>
@@ -90,7 +90,7 @@ _Fig. 6_
 
 We now need to find a method to obtain persistence on the target machine. This will allow us to maintain access to the target even if the passwords of the accounts are changed. To do so, we open a browser on the Kali machine and connect to the target's webserver on port number 8585 by entering `10.0.2.4:8585/wordpress` in the URL bar. The browser will show the home page of the WordPress site hosted on the target’s webserver. Now we click on the WordPress login page. Here we insert the obtained WordPress credentials of the _admin_ user (password: _sploit_, _Fig. 6_).
 
-Let’s click on _Appearance_ and then _Editor_. Now search for _Theme Functions_ under _Themes_ on the right and click on it. Here we insert the PHP code of a simple web shell (_Fig. 7_) and we click on _Update file_. This allows us to have access to a remote Command Prompt just by connecting to the webserver with a broswer. To do this, we insert `10.0.2.4:8585/wordpress/?cmd=command` in the URL bar, replacing _command_ with any command we want to execute. It will be very difficult for the defender to notice that there is a web shell running on his webserver, because its input and output will be hidden as common HTTP traffic.
+Once we are in the dashboard of the user _admin_, we click on _Appearance_ and then _Editor_. Now search for _Theme Functions_ under _Themes_ (on the right) and click on it. Here we insert the PHP code of a simple web shell (_Fig. 7_) and we click on _Update file_. This allows us to have access to a remote Command Prompt just by connecting to the webserver with a broswer. To do this, we insert `10.0.2.4:8585/wordpress/?cmd=command` in the URL bar, replacing _command_ with any command we want to execute. It will be very difficult for the defender to notice that there is a web shell running on his webserver, because its input and output will be hidden as common HTTP traffic.
 
 </div>
 
